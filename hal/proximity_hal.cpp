@@ -3,7 +3,7 @@
 #include <malloc.h>
 #include <log/log_system.h>
 
-#include "proximity_hal.h"
+#include "dev/proximity_hal.h"
 #include "dev/proximity_sensor.h"
 
 #define LOG_TAG "PROX"
@@ -11,12 +11,12 @@
 static int poll_proximity_sensor(proximity_sensor_device_t *dev, int precision) {
     SLOGV("Polling proximity sensor");
 
-    if (!dev)
+    if (!dev) {
+        SLOGV("No device provided");
         return -1;
+    }
 
-    poll_sensor(dev->fd, precision);
-
-    return 0;
+    return poll_sensor(dev->fd, precision);
 }
 
 static int close_proximity_sensor(proximity_sensor_device_t *dev) {

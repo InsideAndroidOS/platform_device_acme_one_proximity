@@ -9,6 +9,29 @@ cc_defaults {
     vendor: true,
 }
 
+cc_library_shared {
+    name: "proximityhal.default",
+    defaults: [
+        "vendor.acme.one.proximity.defaults",
+    ],
+    srcs: [
+        "hal/proximity_hal.cpp"
+    ],
+    header_libs: [
+        "liblog_headers",
+        "libhardware_headers",
+    ],
+    local_include_dirs: [
+        "include",
+    ],
+    shared_libs: [
+        "liblog",
+    ],
+    static_libs: [
+        "libacmeproximityshim",
+    ]
+}
+
 cc_library {
     name: "libacmeproximityshim",
     defaults: [
